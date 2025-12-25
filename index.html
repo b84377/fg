@@ -1,3 +1,43 @@
+<!-- ===== 書籍介紹影片 Modal ===== -->
+<div id="bookModal" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,0.65);
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+">
+  <div style="
+    position:relative;
+    width:90%;
+    max-width:900px;
+    background:#fff;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  ">
+    <button id="closeBookModal" style="
+      position:absolute;
+      top:6px; right:12px;
+      font-size:28px;
+      background:none;
+      border:none;
+      cursor:pointer;
+    ">&times;</button>
+
+    <!-- 🔴🔴🔴 書籍介紹影片「就是放在這裡」🔴🔴🔴 -->
+    <div style="aspect-ratio:16/9;">
+     <iframe
+  id="bookVideo"
+  src="https://www.youtube.com/embed/ieCA2mDwLMM"
+  title="書籍介紹影片"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width:100%; height:100%; border:none; border-radius:12px;">
+</iframe>
+
 <!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -5,7 +45,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fu Green — 輔仁大學圖書館智慧永續</title>
   <meta name="description" content="Fu Green — 輔仁大學圖書館智慧永續推動計畫。能源監控、綠色閱讀挑戰、AI小助手 Fu Bot、永續活動與個人永續報告。" />
-  <link rel="icon" href="https://lurl.cc/RDMZT" type="image/png">
   <style>
     :root{
       --green-700:#007a3d;
@@ -21,7 +60,7 @@
     .container{max-width:var(--max-width);margin:0 auto;padding:28px}
 
     .site-brand{display:flex;align-items:center;gap:16px}
-    .logo img{width:64px;height:64px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--green-500),var(--green-700));display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:22px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
     .site-title{font-size:18px;font-weight:700}
     nav{margin-left:auto}
     nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:18px;font-weight:600;font-size:18px}
@@ -32,7 +71,15 @@
     .cta{display:inline-block;background:white;color:var(--green-700);padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;box-shadow:0 6px 20px rgba(7,83,48,0.12);font-size:18px;transition:0.2s}
     .cta:hover{background:var(--green-500);color:white}
 
-    .hero-card{background:var(--green-100);padding:20px;border-radius:14px;width:100%;max-width:500px;margin:auto}
+    .hero-card {
+  background: var(--green-100);
+  padding: 20px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px; 
+  margin-right: 48px;
+  margin-left: auto;
+}
     .kpi{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     .kpi .item{flex:1;background:white;padding:12px;border-radius:10px;text-align:center;min-width:120px}
     .kpi .num{font-size:20px;font-weight:800;color:var(--green-700)}
@@ -49,27 +96,28 @@
     .step .dot{width:14px;height:14px;border-radius:50%;background:var(--green-700);margin-top:6px}
     .step p{margin:0}
 
-    footer{background:#f4fff7;padding:26px;margin-top:40px;border-top:1px solid #e6f3ea;text-align:center;position:relative}
+    footer{background:#f4fff7;padding:26px;margin-top:40px;border-top:1px solid #e6f3ea;text-align:center}
     .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
 
-    .back-home{
-      position:absolute;
-      right:20px;
-      top:20px;
-      background:var(--green-700);
-      color:white;
-      padding:10px 16px;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:600;
-      transition:0.3s;
+    /* Modal 彈窗樣式 */
+    #betaModal {
+      display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;
+      background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:1000;
     }
-    .back-home:hover{background:var(--green-500)}
-
-    @media(max-width:600px){
-      .hero h1{font-size:28px}
-      .cta{font-size:16px;padding:10px 14px}
-      nav{display:none}
+    #betaModal .modal-content {
+      position:relative;background:#fff;border-radius:16px;max-width:360px;width:90%;padding:20px;
+      box-shadow:0 6px 30px rgba(0,0,0,0.2);
+      animation:modalIn 0.35s;
+    }
+    @keyframes modalIn {
+      from{transform:translateY(60px);opacity:0;}
+      to{transform:translateY(0);opacity:1;}
+    }
+    #closeModal {
+      position:absolute;top:10px;right:10px;background:none;border:none;font-size:24px;cursor:pointer;color:#888;
+    }
+    #closeModal:hover{
+      color:#007a3d;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -78,7 +126,7 @@
   <header>
     <div class="container" style="display:flex;align-items:center;">
       <div class="site-brand">
-        <div class="logo"><img src="https://lurl.cc/RDMZT" alt="Fu Green Logo"></div>
+        <div class="logo">FG</div>
         <div>
           <div class="site-title">Fu Green</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.85);">輔仁大學圖書館智慧永續推動計畫</div>
@@ -88,86 +136,211 @@
         <a href="#features">功能介紹</a>
         <a href="#timeline">期程</a>
         <a href="#impact">預期成效</a>
+        <a href="#!" id="openBookBtn">書籍介紹</a>
         <a href="#contact">聯絡</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="container hero">
-      <div style="flex:1;min-width:300px">
-        <h1>以科技連結閱讀與永續 — Fu Green 智慧永續圖書館</h1>
-        <p>Fu Green 結合 AI 智慧管理、能源監控與永續教育，讓圖書館成為低碳學習場域。即時能源視覺化、綠色閱讀挑戰、個人永續報告與 Fu Bot 智能助理，打造校園零碳行動入口。</p>
-        <a class="cta" href="#features">了解更多功能</a>
-      </div>
-      <aside class="hero-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div>
-            <div style="font-size:13px;color:var(--muted)">今日節能建議</div>
-            <div style="font-weight:800;font-size:18px;margin-top:6px">關閉未使用會議室空調 2 小時</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:12px;color:var(--muted)">本月減碳</div>
-            <div style="font-weight:800;font-size:20px;color:var(--green-700)">1.8 kg CO₂e</div>
-          </div>
-        </div>
-        <canvas id="energyChart"></canvas>
-        <div class="kpi">
-          <div class="item"><div class="num">5,230+</div><div class="muted">綠色閱讀參與人次</div></div>
-          <div class="item"><div class="num">+34%</div><div class="muted">電子書借閱成長</div></div>
-          <div class="item"><div class="num">−12%</div><div class="muted">能源消耗下降</div></div>
-        </div>
-      </aside>
-    </section>
+   <section class="container hero">
+  <div style="flex:1;min-width:300px; display:flex; flex-direction:column; gap:20px;">
 
-    <section id="features" class="container">
-      <h2 style="font-size:18px">主要功能</h2>
-      <div class="features">
-        <div class="card"><h3>能源監控儀表板</h3><p class="muted">即時顯示空調、照明、人流與能源趨勢，輔以節能建議。</p></div>
-        <div class="card"><h3>綠色閱讀挑戰</h3><p class="muted">閱讀任務、綠點兌換與減碳成效自動追蹤。</p></div>
-        <div class="card"><h3>個人永續報告</h3><p class="muted">每月生成減碳與行為建議報告，提供視覺化圖表。</p></div>
-      </div>
-    </section>
+    <!-- 文字 + 按鈕 + 影片包成同一塊 -->
+    <div>
+   <section style="max-width: 1200px; margin: auto; padding: 40px 20px;">
 
-    <section id="timeline" class="container">
-      <h2 style="font-size:18px">期程規劃</h2>
-      <div class="timeline">
-        <div class="step"><div class="dot"></div><div><strong>2026 Q1</strong><p class="muted">規劃與需求調查，建立能源資料基線。</p></div></div>
-        <div class="step"><div class="dot"></div><div><strong>2026 Q2</strong><p class="muted">開發 Fu Bot 與能源儀表板，進行 Prototype 測試。</p></div></div>
-        <div class="step"><div class="dot"></div><div><strong>2026 Q3</strong><p class="muted">公測與教育推廣，舉辦 10 場綠色挑戰活動。</p></div></div>
-        <div class="step"><div class="dot"></div><div><strong>2026 Q4</strong><p class="muted">成果彙整，能源下降預期達 12%，形成最佳實踐報告。</p></div></div>
-      </div>
-    </section>
+  <!-- 標題 -->
+  <h1 style="font-size: 2.2rem; font-weight: 700; color: #1a3d2f; margin-bottom: 16px; text-align: left;">
+    以科技連結閱讀與永續 — Fu Green 智慧永續圖書館
+  </h1>
 
-    <section id="impact" class="container">
-      <h2 style="font-size:18px">預期成效</h2>
-      <div class="features">
-        <div class="card"><h3>參與與學習</h3><p class="muted">一年內 5,000+ 人次參與永續挑戰，永續知識提升 30%。</p></div>
-        <div class="card"><h3>能源與減碳</h3><p class="muted">總用電下降 12%，二氧化碳減量約 1.8 噸 CO₂e。</p></div>
-        <div class="card"><h3>社群與實踐</h3><p class="muted">合作舉辦 30+ 活動，促進跨校與社區永續共學。</p></div>
-      </div>
-    </section>
+  <!-- 介紹文字（靠左、較佳行距） -->
+  <p style="text-align: left; max-width: 760px; font-size: 1.1rem; line-height: 1.7; color: #333;">
+    Fu Green 結合 AI 智慧管理、能源監控與永續教育，讓圖書館成為低碳學習場域。
+    即時能源視覺化、綠色閱讀挑戰、個人永續報告與 Fu Bot 智能助理，打造校園零碳行動入口。
+  </p>
 
-    <section id="contact" class="container" style="margin-bottom:36px">
-      <h2 style="font-size:18px">聯絡與合作</h2>
-      <div class="card" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center">
-        <div><strong>圖書館永續小組</strong><br/><span class="muted">library-sdgs@gmail.com</span></div>
-        <div><strong>計畫負責人</strong><br/><span class="muted">蔡欣樂（研究生）</span></div>
-        <a href="https://fu-green.app" target="_blank" class="cta">加入 Fu Green 公測</a>
-      </div>
-    </section>
-  </main>
+  <!-- 按鈕 + 大型影片 -->
+  <div style="
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+  ">
 
-  <footer>
-    <a href="https://b84377-beep.github.io/fugreen/" class="back-home">返回首頁</a>
-    <div class="footer-inner">
-      <div class="logo"><img src="https://lurl.cc/RDMZT" alt="Fu Green Logo" style="width:42px;height:42px;border-radius:8px;"></div>
-      <div><strong>Fu Green</strong><br/><span class="muted" style="font-size:13px">輔仁大學圖書館智慧永續推動計畫 — 期末報告視覺化</span></div>
-      <div style="font-size:13px;color:var(--muted)">© 輔仁大學圖書館 • 2025</div>
+    <!-- 了解更多 -->
+    <a class="cta" href="#features"
+      style="flex: 0 0 auto; padding: 14px 22px; font-size: 1rem; border-radius: 8px;">
+      了解更多功能
+    </a>
+
+ <!-- 影片 + 圖表 左右排列容器 -->
+<div style="
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+">
+
+  <!-- 左邊影片 (小尺寸) -->
+  <div style="
+    flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  ">
+    <iframe
+      src="https://www.youtube.com/embed/Y5-M9Cv0nLM"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%; height:100%; border:0;"
+    ></iframe>
+  </div>
+
+  <!-- 右邊圖表卡片 -->
+ <aside class="hero-card" 
+  style="
+    flex: 1; 
+    min-width: 360px; 
+    max-width: 560px; 
+    margin-left: 3cm;   /* ★ 加上往右移 3cm */
+  ">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">今日節能建議</div>
+        <div style="font-weight:800;font-size:18px;margin-top:6px">關閉未使用會議室空調 2 小時</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:12px;color:var(--muted)">本月減碳</div>
+        <div style="font-weight:800;font-size:20px;color:var(--green-700)">1.8 kg CO₂e</div>
+      </div>
     </div>
-  </footer>
+
+    <canvas id="energyChart"></canvas>
+
+    <div class="kpi" style="
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      text-align: center;
+    ">
+      <div class="item">
+        <div class="num" style="font-weight: 800; font-size: 20px; color: var(--green-700);">5,230+</div>
+        <div class="muted" style="color: var(--muted);">綠色閱讀參與人次</div>
+      </div>
+      <div class="item">
+        <div class="num" style="font-weight: 800; font-size: 20px; color: var(--green-700);">+34%</div>
+        <div class="muted" style="color: var(--muted);">電子書借閱成長</div>
+      </div>
+      <div class="item">
+        <div class="num" style="font-weight: 800; font-size: 20px; color: var(--green-700);">−12%</div>
+        <div class="muted" style="color: var(--muted);">能源消耗下降</div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- Three-column environmental table layout -->
+<div id="features" style="display:flex; gap:24px; font-family: 'Microsoft JhengHei', sans-serif; line-height:1.6;">
+
+  <!-- Main Functions -->
+  <div style="flex:1; padding:20px; background:#f6f9f4; border-radius:12px;">
+    <h2 style="color:#2f6b3f; font-weight:700; margin-bottom:16px;">主要功能</h2>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">能源監控儀表板</h3>
+    <p>即時掌握能源使用，幫助用戶清晰查看趨勢並提升能源管理。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">綠色閱讀挑戰</h3>
+    <p>閱讀任務推動永續與環保意識教育成效，提升參與度。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">個人永續報告</h3>
+    <p>每月生成使用者綠色行為數據與成績量化，提供更高自我管理性。</p>
+  </div>
+
+  <!-- Timeline -->
+  <div id="timeline" style="flex:1; padding:20px; background:#f6f9f4; border-radius:12px;">
+    <h2 style="color:#2f6b3f; font-weight:700; margin-bottom:16px;">期程規劃</h2>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">2026 Q1</h3>
+    <p>預計導入碳足跡量測，建立能源資料基線。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">2026 Q2</h3>
+    <p>開發 Fu Bot 與能源儀表板，啟動讀者測試。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">2026 Q3</h3>
+    <p>公開測試閱讀挑戰闖關，舉辦 10 場綠色挑戰活動。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">2026 Q4</h3>
+    <p>成效彙整，能源下降預期達 12%，形成最佳實證報告。</p>
+  </div>
+
+  <!-- Expected Outcome -->
+  <div id="impact" style="flex:1; padding:20px; background:#f6f9f4; border-radius:12px;">
+    <h2 style="color:#2f6b3f; font-weight:700; margin-bottom:16px;">預期成效</h2>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">參與與學習</h3>
+    <p>一年內 5,000+ 人次參與永續挑戰，永續知識提高 30%。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">能源與減碳</h3>
+    <p>總用電下降 12%，二氧化碳減量約 1.8 噸 CO₂e。</p>
+
+    <h3 style="margin:12px 0 4px; font-weight:700;">社群與實踐</h3>
+    <p>合作舉辦 30+ 活動，促進跨校與社區永續共學。</p>
+  </div>
+
+</div>
+
+
+<section id="contact" class="container" 
+         style="margin-bottom:36px; margin-left:2cm;">
+  <h2 style="font-size:18px">聯絡與合作</h2>
+
+  <div class="card"
+       style="display:flex;
+              gap:18px;
+              align-items:center;
+              flex-wrap:wrap;
+              justify-content:flex-start;">
+              
+    <div>
+      <strong>圖書館永續小組</strong><br/>
+      <span class="muted">
+        <a href="mailto:fugreen.librarysdgs@gmail.com">
+          fugreen.librarysdgs@gmail.com
+        </a>
+      </span>
+    </div>
+
+    <div>
+      <strong>計畫負責人</strong><br/>
+      <span class="muted">蔡欣樂（圖資系研究生）</span>
+    </div>
+
+    <a href="#!" id="openBetaBtn" class="cta">加入 Fu Green 公測</a>
+  </div>
+</section>
+
+  <!-- Modal 彈窗結構 -->
+  <div id="betaModal">
+    <div class="modal-content">
+      <button id="closeModal" aria-label="Close Modal">&times;</button>
+      <img src="mobile-mockup.jpg" alt="Fu Green 公測示意" style="width:100%;border-radius:12px;" />
+    </div>
+  </div>
 
   <script>
+    // Chart.js 生成圖表
     const ctx = document.getElementById('energyChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
@@ -188,6 +361,135 @@
         scales: {y: {beginAtZero: false}}
       }
     });
+
+    // Modal 彈窗控制
+    const openBtn = document.getElementById('openBetaBtn');
+    const modal = document.getElementById('betaModal');
+    const closeBtn = document.getElementById('closeModal');
+    openBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      modal.style.display = 'flex';
+    });
+    closeBtn.addEventListener('click', function () {
+      modal.style.display = 'none';
+    });
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
+
+<!-- ====== 在 Contact 區塊右邊加入按鈕 ====== -->
+<!-- 找到你的聯絡與合作區塊結束前，加上這行 -->
+<a href="#!" id="openImageBtn" class="cta" 
+   style="margin-left: 12px; margin-top: 2.8cm; display: inline-block;">
+  Fu Green 宣傳小物
+</a>
+
+<!-- ====== Modal：顯示圖片 ====== -->
+<div id="imageModal" style="
+     display: none;
+     position: fixed;
+     top: 0; left: 0;
+     width: 100vw; height: 100vh;
+     background: rgba(0,0,0,0.6);
+     justify-content: center;
+     align-items: center;
+     z-index: 10000;
+">
+  <div style="
+       position: relative;
+       background: #fff;
+       border-radius: 14px;
+       max-width: 90%;
+       width: 800px;
+       padding: 0;
+  ">
+    <button id="closeImageModal" style="
+        position: absolute;
+        top: 8px; right: 12px;
+        background: none;
+        border: none;
+        font-size: 28px;
+        line-height: 1;
+        color: #555;
+        cursor: pointer;
+    ">&times;</button>
+
+    <img src="FuGreen_final.png" alt="FuGreen 產品示意圖"
+         style="width:100%; display:block; border-radius:12px;" />
+  </div>
+</div>
+
+<script>
+// 按鈕 & Modal 操作
+document.addEventListener('DOMContentLoaded', function () {
+  const openImageBtn = document.getElementById('openImageBtn');
+  const imageModal = document.getElementById('imageModal');
+  const closeImageModal = document.getElementById('closeImageModal');
+
+  openImageBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    imageModal.style.display = 'flex';
+  });
+
+  closeBookModal.addEventListener('click', function () {
+  bookModal.style.display = 'none';
+
+  // 🔴 關鍵：停止影片播放
+  bookVideo.src = bookVideo.src;
+});
+
+bookModal.addEventListener('click', function (e) {
+  if (e.target === bookModal) {
+    bookModal.style.display = 'none';
+    bookVideo.src = bookVideo.src;
+  }
+});
+
+  imageModal.addEventListener('click', function (e) {
+    if (e.target === imageModal) {
+      imageModal.style.display = 'none';
+    }
+  });
+});
+const openBookBtn = document.getElementById('openBookBtn');
+const bookModal = document.getElementById('bookModal');
+const closeBookModal = document.getElementById('closeBookModal');
+
+openBookBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  bookModal.style.display = 'flex';
+});
+
+const bookVideo = document.getElementById('bookVideo');
+
+closeBookModal.addEventListener('click', function () {
+  bookModal.style.display = 'none';
+
+  // 🔴 關鍵：停止影片播放
+  bookVideo.src = bookVideo.src;
+});
+
+bookModal.addEventListener('click', function (e) {
+  if (e.target === bookModal) {
+    bookModal.style.display = 'none';
+    bookVideo.src = bookVideo.src;
+  }
+});
+
+bookModal.addEventListener('click', function (e) {
+  if (e.target === bookModal) {
+    bookModal.style.display = 'none';
+  }
+});  
+</script>
+
+<footer style="background: transparent; margin-left: 8cm;">
+  輔仁大學圖書館智慧永續推動計畫 © 輔仁大學圖書館 • 2025
+</footer>
+
+
