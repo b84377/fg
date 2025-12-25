@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fu Green — 輔仁大學圖書館智慧永續</title>
+  <meta name="description" content="Fu Green — 輔仁大學圖書館智慧永續推動計畫。能源監控、綠色閱讀挑戰、AI小助手 Fu Bot、永續活動與個人永續報告。" />
+  <link rel="icon" href="https://lurl.cc/RDMZT" type="image/png">
+  <style>
+    :root{
+      --green-700:#007a3d;
+      --green-500:#0aa05a;
+      --green-100:#eaf7ee;
+      --muted:#6b6b6b;
+      --max-width:1100px;
+      font-family:'Noto Sans TC', system-ui, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#ffffff 0%,#fbfff9 100%);color:#12221a;font-family:'Noto Sans TC', system-ui, sans-serif;}
+    header{background:var(--green-700);color:white}
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+    .site-brand{display:flex;align-items:center;gap:16px}
+    .logo img{width:64px;height:64px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+    .site-title{font-size:18px;font-weight:700}
+    nav{margin-left:auto}
+    nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:18px;font-weight:600;font-size:18px}
+
+    .hero{display:flex;gap:32px;align-items:center;padding:48px 0;flex-wrap:wrap}
+    .hero h1{font-size:36px;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);line-height:1.7}
+    .cta{display:inline-block;background:white;color:var(--green-700);padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;box-shadow:0 6px 20px rgba(7,83,48,0.12);font-size:18px;transition:0.2s}
+    .cta:hover{background:var(--green-500);color:white}
+
+    .hero-card{background:var(--green-100);padding:20px;border-radius:14px;width:100%;max-width:500px;margin:auto}
+    .kpi{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+    .kpi .item{flex:1;background:white;padding:12px;border-radius:10px;text-align:center;min-width:120px}
+    .kpi .num{font-size:20px;font-weight:800;color:var(--green-700)}
+
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:24px}
+    .card{background:white;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted);font-size:14px}
+
+    canvas{width:100%;height:200px;margin-top:10px}
+
+    .timeline{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+    .step{display:flex;gap:14px;align-items:flex-start}
+    .step .dot{width:14px;height:14px;border-radius:50%;background:var(--green-700);margin-top:6px}
+    .step p{margin:0}
+
+    footer{background:#f4fff7;padding:26px;margin-top:40px;border-top:1px solid #e6f3ea;text-align:center;position:relative}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
+
+    .back-home{
+      position:absolute;
+      right:20px;
+      top:20px;
+      background:var(--green-700);
+      color:white;
+      padding:10px 16px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
+    }
+    .back-home:hover{background:var(--green-500)}
+
+    @media(max-width:600px){
+      .hero h1{font-size:28px}
+      .cta{font-size:16px;padding:10px 14px}
+      nav{display:none}
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;">
+      <div class="site-brand">
+        <div class="logo"><img src="https://lurl.cc/RDMZT" alt="Fu Green Logo"></div>
+        <div>
+          <div class="site-title">Fu Green</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.85);">輔仁大學圖書館智慧永續推動計畫</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#features">功能介紹</a>
+        <a href="#timeline">期程</a>
+        <a href="#impact">預期成效</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div style="flex:1;min-width:300px">
+        <h1>以科技連結閱讀與永續 — Fu Green 智慧永續圖書館</h1>
+        <p>Fu Green 結合 AI 智慧管理、能源監控與永續教育，讓圖書館成為低碳學習場域。即時能源視覺化、綠色閱讀挑戰、個人永續報告與 Fu Bot 智能助理，打造校園零碳行動入口。</p>
+        <a class="cta" href="#features">了解更多功能</a>
+      </div>
+      <aside class="hero-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">今日節能建議</div>
+            <div style="font-weight:800;font-size:18px;margin-top:6px">關閉未使用會議室空調 2 小時</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted)">本月減碳</div>
+            <div style="font-weight:800;font-size:20px;color:var(--green-700)">1.8 kg CO₂e</div>
+          </div>
+        </div>
+        <canvas id="energyChart"></canvas>
+        <div class="kpi">
+          <div class="item"><div class="num">5,230+</div><div class="muted">綠色閱讀參與人次</div></div>
+          <div class="item"><div class="num">+34%</div><div class="muted">電子書借閱成長</div></div>
+          <div class="item"><div class="num">−12%</div><div class="muted">能源消耗下降</div></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="features" class="container">
+      <h2 style="font-size:18px">主要功能</h2>
+      <div class="features">
+        <div class="card"><h3>能源監控儀表板</h3><p class="muted">即時顯示空調、照明、人流與能源趨勢，輔以節能建議。</p></div>
+        <div class="card"><h3>綠色閱讀挑戰</h3><p class="muted">閱讀任務、綠點兌換與減碳成效自動追蹤。</p></div>
+        <div class="card"><h3>個人永續報告</h3><p class="muted">每月生成減碳與行為建議報告，提供視覺化圖表。</p></div>
+      </div>
+    </section>
+
+    <section id="timeline" class="container">
+      <h2 style="font-size:18px">期程規劃</h2>
+      <div class="timeline">
+        <div class="step"><div class="dot"></div><div><strong>2026 Q1</strong><p class="muted">規劃與需求調查，建立能源資料基線。</p></div></div>
+        <div class="step"><div class="dot"></div><div><strong>2026 Q2</strong><p class="muted">開發 Fu Bot 與能源儀表板，進行 Prototype 測試。</p></div></div>
+        <div class="step"><div class="dot"></div><div><strong>2026 Q3</strong><p class="muted">公測與教育推廣，舉辦 10 場綠色挑戰活動。</p></div></div>
+        <div class="step"><div class="dot"></div><div><strong>2026 Q4</strong><p class="muted">成果彙整，能源下降預期達 12%，形成最佳實踐報告。</p></div></div>
+      </div>
+    </section>
+
+    <section id="impact" class="container">
+      <h2 style="font-size:18px">預期成效</h2>
+      <div class="features">
+        <div class="card"><h3>參與與學習</h3><p class="muted">一年內 5,000+ 人次參與永續挑戰，永續知識提升 30%。</p></div>
+        <div class="card"><h3>能源與減碳</h3><p class="muted">總用電下降 12%，二氧化碳減量約 1.8 噸 CO₂e。</p></div>
+        <div class="card"><h3>社群與實踐</h3><p class="muted">合作舉辦 30+ 活動，促進跨校與社區永續共學。</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="container" style="margin-bottom:36px">
+      <h2 style="font-size:18px">聯絡與合作</h2>
+      <div class="card" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center">
+        <div><strong>圖書館永續小組</strong><br/><span class="muted">library-sdgs@gmail.com</span></div>
+        <div><strong>計畫負責人</strong><br/><span class="muted">蔡欣樂（研究生）</span></div>
+        <a href="https://fu-green.app" target="_blank" class="cta">加入 Fu Green 公測</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://b84377-beep.github.io/fugreen/" class="back-home">返回首頁</a>
+    <div class="footer-inner">
+      <div class="logo"><img src="https://lurl.cc/RDMZT" alt="Fu Green Logo" style="width:42px;height:42px;border-radius:8px;"></div>
+      <div><strong>Fu Green</strong><br/><span class="muted" style="font-size:13px">輔仁大學圖書館智慧永續推動計畫 — 期末報告視覺化</span></div>
+      <div style="font-size:13px;color:var(--muted)">© 輔仁大學圖書館 • 2025</div>
+    </div>
+  </footer>
+
+  <script>
+    const ctx = document.getElementById('energyChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+        datasets: [{
+          label: '能源使用量 (kWh)',
+          data: [3200,3100,3000,2950,2900,2800,2700,2680,2650,2600,2580,2550],
+          borderColor: '#0aa05a',
+          backgroundColor: 'rgba(10,160,90,0.2)',
+          tension:0.3,
+          fill:true
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {legend: {display: false}},
+        scales: {y: {beginAtZero: false}}
+      }
+    });
+  </script>
+</body>
+</html>
